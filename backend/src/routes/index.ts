@@ -1,5 +1,5 @@
-import { Router } from "express"
-import { readdirSync } from "fs"
+import { Router } from 'express'
+import { readdirSync } from 'fs'
 
 /**
  * Permite devolver la ruta del directorio de los routes

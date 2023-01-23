@@ -1,5 +1,5 @@
-import { Schema, Types, model, Model } from "mongoose";
-import { Doctor } from "../interfaces/doctor.interface";
+import { Schema, Types, model, Model } from 'mongoose'
+import { Doctor } from '@interfaces/doctor.interface'
 
 const DoctorSchema = new Schema<Doctor>(
     {

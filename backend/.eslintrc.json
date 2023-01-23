@@ -1,0 +1,42 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "standard-with-typescript",
+    "plugin:prettier/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./backend/tsconfig.json" //Indicar donde estan las configuraciones de Typescript
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "import/no-unresolved":[
+      "error",
+      {
+        "plugins":[
+          "module-resolve",
+          {
+            "alias":{
+              "@routes": "./src/routes",
+              "@controllers": "./src/controllers",
+              "@config": "./src/config",
+              "@models": "./src/models",
+              "@interfaces": "./src/interfaces",
+              "@services": "./src/services",
+              "@utils": "./src/utils",
+              "@middlewares": "./src/middlewares"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

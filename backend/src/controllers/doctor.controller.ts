@@ -1,6 +1,6 @@
-import { Request, Response } from "express"
-import { createDoctor, findDoctors, findOneDoctor, findOneAndUpdateDoctor, deleteOneDoctor } from "../services/doctor.service"
-import { handlesHttp } from "../utils/error.handle"
+import { Request, Response } from 'express'
+import { createDoctor, findDoctors, findOneDoctor, findOneAndUpdateDoctor, deleteOneDoctor } from '@services/doctor.service'
+import { handlesHttp } from '@utils/error.handle'
 
 /**
  * Funcion que permite recibir el ID del Doctor a buscar 
@@ -13,7 +13,7 @@ const getDoctor = async ({ params }: Request, res: Response) => {
         const responseDoctor = await findOneDoctor(id)
         res.send(responseDoctor)
     } catch (e) {
-        handlesHttp(res, 'ERROR_GET_DOCTOR')
+        handlesHttp(res, 500, 'ERROR_GET_DOCTOR')
     }
 }
 
@@ -21,12 +21,12 @@ const getDoctor = async ({ params }: Request, res: Response) => {
  * Funcion que permite traer las lista de todos los Doctores
  * @param res datos del Doctor
  */
-const getDoctors = async (res: Response) => {
+const getDoctors = async (req: Request, res: Response) => {
     try {
         const responseDoctor = await findDoctors()
         res.send(responseDoctor)
     } catch (e) {
-        handlesHttp(res, 'ERROR_GET_DOCTORS')
+        handlesHttp(res, 500, 'ERROR_GET_DOCTORS')
     }
 }
 
@@ -41,7 +41,7 @@ const updateDoctor = async ({ params, body }: Request, res: Response) => {
         const responseDoctor = await findOneAndUpdateDoctor(id, body)
         res.send(responseDoctor)
     } catch (e) {
-        handlesHttp(res, 'ERROR_UPDATE_DOCTOR')
+        handlesHttp(res, 500, 'ERROR_UPDATE_DOCTOR')
     }
 }
 
@@ -55,7 +55,7 @@ const postDoctor = async ({ body }: Request, res: Response) => {
         const responseDoctor = await createDoctor(body)
         res.send(responseDoctor)
     } catch (e) {
-        handlesHttp(res, 'ERROR_POST_DOCTOR')
+        handlesHttp(res, 500, 'ERROR_POST_DOCTOR')
     }
 }
 
@@ -70,7 +70,7 @@ const deleteDoctor = async ({ params }: Request, res: Response) => {
         const responseDoctor = await deleteOneDoctor(id)
         res.send(responseDoctor)
     } catch (e) {
-        handlesHttp(res, 'ERROR_DELETE_DOCTOR')
+        handlesHttp(res, 500, 'ERROR_DELETE_DOCTOR')
     }
 }
 
