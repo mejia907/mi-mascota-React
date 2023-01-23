@@ -1,14 +1,14 @@
-import { Doctor } from "../interfaces/doctor.interface"
-import DoctorModel from "../models/doctor.model"
+import { Doctor } from '@interfaces/doctor.interface'
+import DoctorModel from '@models/doctor.model'
 
 /**
  * Funcion que permite crear un nuevo registro
- * @param doctor interfaz 
+ * @param doctor interfaz
  * @returns JSON con el registro creado
  */
-const createDoctor = async (doctor: Doctor) => {
-    const reponseInsert = await DoctorModel.create(doctor)
-    return reponseInsert
+const createDoctor = async (doctor: Doctor): Promise<Doctor> => {
+  const reponseInsert = await DoctorModel.create(doctor)
+  return reponseInsert
 }
 
 /**
@@ -16,8 +16,8 @@ const createDoctor = async (doctor: Doctor) => {
  * @returns JSON con lista de Doctores
  */
 const findDoctors = async () => {
-    const responseDoctor = await DoctorModel.find({})
-    return responseDoctor
+  const responseDoctor = await DoctorModel.find({})
+  return responseDoctor
 }
 
 /**
@@ -26,8 +26,8 @@ const findDoctors = async () => {
  * @returns JSON con el registro encontrado
  */
 const findOneDoctor = async (id: string) => {
-    const responseDoctor = await DoctorModel.findOne({ _id: id })
-    return responseDoctor
+  const responseDoctor = await DoctorModel.findOne({ _id: id })
+  return responseDoctor
 }
 
 /**
@@ -37,10 +37,10 @@ const findOneDoctor = async (id: string) => {
  * @returns JSON con el registro actualizado
  */
 const findOneAndUpdateDoctor = async (id: string, data: Doctor) => {
-    const responseDoctor = await DoctorModel.findOneAndUpdate({ _id: id }, data, {
-        new: true, //Permite retornar el objeto ya actualizado o sino retornaria el objeto antes de actualizar
-    })
-    return responseDoctor
+  const responseDoctor = await DoctorModel.findOneAndUpdate({ _id: id }, data, {
+    new: true, //Permite retornar el objeto ya actualizado o sino retornaria el objeto antes de actualizar
+  })
+  return responseDoctor
 }
 
 /**
@@ -49,9 +49,8 @@ const findOneAndUpdateDoctor = async (id: string, data: Doctor) => {
  * @returns JSON con la respuesta de Mongo
  */
 const deleteOneDoctor = async (id: string) => {
-    const responseDoctor = await DoctorModel.deleteOne({ _id: id })
-    return responseDoctor
+  const responseDoctor = await DoctorModel.deleteOne({ _id: id })
+  return responseDoctor
 }
-
 
 export { createDoctor, findDoctors, findOneDoctor, findOneAndUpdateDoctor, deleteOneDoctor }

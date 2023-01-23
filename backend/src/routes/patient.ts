@@ -1,5 +1,5 @@
-import { Router } from "express"
-import { deletePatient, getPatient, getPatients, postPatient, updatePatient } from "../controllers/patient.controller"
+import { Router } from 'express'
+import { deletePatient, getPatient, getPatients, postPatient, updatePatient } from '@controllers/patient.controller'
 
 const router = Router()
 
