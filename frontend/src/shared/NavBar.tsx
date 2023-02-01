@@ -2,7 +2,7 @@ import { AppBar, Button, Container, Grid, Stack, Toolbar, Typography } from "@mu
 import { Box } from "@mui/system";
 import React from "react";
 
-export const NavBar: React.FC<{}> = () =>{
+export const NavBar = () => {
     return(
         <Box sx={{flexGrow:1}}>
             <AppBar position="sticky" color="default">
