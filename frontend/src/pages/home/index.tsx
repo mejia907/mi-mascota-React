@@ -1,37 +1,47 @@
 import { Box, Button, Grid, Paper, TextField, ToggleButton, ToggleButtonGroup, Typography, Avatar, styled } from '@mui/material'
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../api/login.api';
 
 import { useNotification } from '../../context/notification.context';
 import { LoginValidate } from '../../utils/validateForm';
 
 type LoginType = {
-    username: string,
+    user: string,
     password: string,
     typeUser: string,
 }
 
-export const HomePage: React.FC<{}> = () => {
+const INITIAL_STATE = {
+    user: "",
+    password: "",
+    typeUser: "patient",
+}
+
+export const HomePage = () => {
 
     const navigate = useNavigate()
     const { getError, getSuccess } = useNotification()
 
-    const [loginData, setLoginData] = React.useState<LoginType>({
-        username: "",
-        password: "",
-        typeUser: "patient",
-    })
+    const [loginData, setLoginData] = React.useState<LoginType>(INITIAL_STATE)
 
     const infoLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+
+    const handleLogin = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
-        LoginValidate.validate(loginData).then(() => {
+        LoginValidate.validate(loginData).then(async () =>  {
             //getSuccess(JSON.stringify(loginData))
-            getSuccess("Iniciaste sesión correctamente!")
-            navigate(loginData.typeUser)
+            const response = await login.singin({user:loginData.user, password:loginData.password})
+            if(response.data.token && response.data.user){
+                navigate(loginData.typeUser) 
+                getSuccess("Iniciaste sesión correctamente!")
+                setLoginData(INITIAL_STATE)
+            }else{
+                getError(response.data)
+            } 
         }).catch((error) => {
             getError(error.message)
         })
@@ -40,7 +50,6 @@ export const HomePage: React.FC<{}> = () => {
     const handleChangeUser = (e: React.MouseEvent<HTMLElement>, newAlignment: string,) => {
         setLoginData({ ...loginData, typeUser: newAlignment });
     };
-
 
     const BackgroundLogin = styled('div')(({ theme }) => ({
         padding: theme.spacing(1),
@@ -70,8 +79,8 @@ export const HomePage: React.FC<{}> = () => {
                                 <ToggleButton value="admin">Administrador</ToggleButton>
                             </ToggleButtonGroup>
                         </Box>
-                        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
-                            <TextField name="username" onChange={infoLogin} fullWidth label="Usuario" sx={{ mt: 2, mb: 1.5 }} margin="normal" type="text" />
+                        <Box component="form" onSubmit={handleLogin} sx={{ mt: 5 }}>
+                            <TextField name="user" onChange={infoLogin} fullWidth label="Usuario" sx={{ mt: 2, mb: 1.5 }} margin="normal" type="text" />
                             <TextField name="password" onChange={infoLogin} fullWidth label="Contraseña" sx={{ mt: 1.5, mb: 1.5 }} margin="normal" type="password" />
                             <Button fullWidth type="submit" variant='contained' sx={{ mt: 1.5, mb: 3 }}>Aceptar</Button>
                         </Box>

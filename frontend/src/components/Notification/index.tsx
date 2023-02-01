@@ -8,7 +8,7 @@ type NotificationProps = {
     handleClose: () => void
 }
 
-export const Notification: React.FC<NotificationProps> = ({ open, message, severety, handleClose }) => {
+export const Notification = ({ open, message, severety, handleClose }: NotificationProps) => {
     return (
         <Snackbar anchorOrigin={{ vertical: "top", horizontal: "right" }} autoHideDuration={4000} open={open} onClose={handleClose}>
             <Alert onClose={handleClose} severity={severety}>

@@ -7,10 +7,13 @@ type ConetextProps = {
     getSuccess: (message: string) => void,
 }
 
+type NotificationProviderProps = {
+    children: JSX.Element
+}
+
 const NotificationContext = React.createContext<ConetextProps | null>(null)
 
-
-export const NotificationProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+export const NotificationProvider = ({ children }: NotificationProviderProps ) => {
 
     const [message, setMessage] = React.useState("")
     const [open, setOpen] = React.useState(false)

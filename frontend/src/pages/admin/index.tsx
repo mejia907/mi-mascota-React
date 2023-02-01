@@ -1,6 +1,6 @@
 import React from "react";
 
-export const AdminDashboardPage: React.FC<{}> = () => {
+export const AdminDashboardPage = () => {
     return(
         <div>Bienvenido</div>
     )
