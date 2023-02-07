@@ -22,4 +22,21 @@ const checkJwt = (req: RequestExt, res: Response, next: NextFunction ) =>{
   }
 }
 
-export { checkJwt }
+const checkJwtCookie = (req: RequestExt, res: Response, next: NextFunction) => {
+  try {
+    const { auth } = req.cookies
+    const isValidUser = verifyToken(`${auth}`)
+    
+    if(!isValidUser){      
+      handlesHttp(res, 401, 'TOKEN_INVALID') 
+    }else{
+      req.user = isValidUser
+      next()
+    }
+  } catch (e) {
+    handlesHttp(res, 400, 'SESSION_INVALID') 
+  }
+
+}
+
+export { checkJwt, checkJwtCookie }

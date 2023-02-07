@@ -1,4 +1,4 @@
-export const AdminDashboardPage = () => {
+export const DoctornDashboardPage = () => {
     return(
         <div>Bienvenido</div>
     )
