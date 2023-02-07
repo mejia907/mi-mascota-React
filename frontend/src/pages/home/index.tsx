@@ -33,9 +33,12 @@ export const HomePage = () => {
     const handleLogin = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
         LoginValidate.validate(loginData).then(async () =>  {
-            //getSuccess(JSON.stringify(loginData))
+            getSuccess(JSON.stringify(loginData))
             const response = await login.singin({user:loginData.user, password:loginData.password})
-            if(response.data.token && response.data.user){
+            console.log(response);
+            
+            //if(response.data.token && response.data.user){
+            if(response.data == 'Login'){
                 navigate(loginData.typeUser) 
                 getSuccess("Iniciaste sesión correctamente!")
                 setLoginData(INITIAL_STATE)

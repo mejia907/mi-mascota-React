@@ -8,7 +8,8 @@ import db from '@config/mongo'
 const PORT = process.env.PORT || 3001
 const app= express()
 app.use(cors({
-    origin:['http://localhost:5173']
+    origin:[`${process.env.URL_FRONTEND}`],
+    credentials: true
 }))
 app.use(express.json())
 app.use(router)

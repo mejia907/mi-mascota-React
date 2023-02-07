@@ -2,7 +2,6 @@ import { Auth } from '@interfaces/auth.interface';
 import { User } from '@interfaces/user.interface';
 import UserModel from '@models/user.model';
 import { encrypt, verified } from '@utils/bcrypt.handle';
-import { generateToken } from '@utils/jwt.handle';
 
 /**
  * Funcion que permite crear un nuevo usuario en el sistema
@@ -34,23 +33,7 @@ const registerUser = async ({ user, password, email, name }: User) => {
  */
 const loginUser = async ({ user, password }: Auth) => {
   const checkUser = await UserModel.findOne({ user })
-
-  if (!checkUser) return 'NOT_FOUND_USER'
-
-  const passwordHash = checkUser.password;
-  const isCorrect = await verified(password, passwordHash);
-
-  if (!isCorrect) return 'PASSWORD_INCORRECT'
-
-  // Permite generar un token para la sesion del usuario
-  const token = generateToken(checkUser.id)
-
-  const dataUser= {
-    token,
-    user: checkUser
-  }
-
-  return dataUser
+  return checkUser
 }
 
 export { loginUser, registerUser };
