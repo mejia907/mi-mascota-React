@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.app {
+    display: flex;
+    position: relative;
+}
+
 .login{
     background-image: url("../src/assets/images/background_login.svg");
     background-repeat: no-repeat;
@@ -7,3 +22,4 @@
     background-position: center center;
     min-height: 90vh;
 }
+

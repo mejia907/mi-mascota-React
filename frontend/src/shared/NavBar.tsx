@@ -1,8 +1,9 @@
+import { useLocation } from "react-router-dom";
 import { AppBar, Button, Container, Grid, Stack, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
 
 export const NavBar = () => {
+    const location = useLocation()
     return(
         <Box sx={{flexGrow:1}}>
             <AppBar position="sticky" color="default">
@@ -12,13 +13,15 @@ export const NavBar = () => {
                             <Grid item>
                                 <Typography sx={{fontWeight:"bold", fontSize:20}}>Mi Mascota</Typography>
                             </Grid>
-                            <Grid item>
-                                <Stack spacing={2} direction="row">
-                                    <Button variant="text">Nosotros</Button>
-                                    <Button variant="text">Contáctanos</Button>
-                                    <Button variant="contained">Regístrate</Button>
-                                </Stack>
-                            </Grid>
+                            {location.pathname === '/' ?
+                                <Grid item>
+                                    <Stack spacing={2} direction="row">
+                                        <Button variant="text">Nosotros</Button>
+                                        <Button variant="text">Contáctanos</Button>
+                                        {/*<Button variant="contained">Regístrate</Button>*/}
+                                    </Stack>
+                                </Grid>
+                            :null }
                         </Grid>
                     </Container>
                 </Toolbar>
