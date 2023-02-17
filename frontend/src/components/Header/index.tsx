@@ -11,7 +11,7 @@ export const Header = ({title , subtitle}: HeaderProps) => {
       <Typography variant="h5" fontWeight={"bold"} sx={{mb:"5px"}}>
         {title}
       </Typography>
-      <Typography>
+      <Typography color="primary">
         {subtitle}
       </Typography>
     </Box>

@@ -7,6 +7,7 @@ type ThemePro = {
 export enum themePalette {
     background = "#f8ffff",
     primary = "#008080",
+    textPrimary = "#ffffff",    
     //Alert Styles
     error_main = "#f44336",
     success_main = "#66bb6a",
@@ -19,7 +20,8 @@ const theme = createTheme({
             default: themePalette.background
         },
         primary: {
-            main: themePalette.primary
+            main: themePalette.primary,
+            contrastText: themePalette.textPrimary
         }
     },
     components: {

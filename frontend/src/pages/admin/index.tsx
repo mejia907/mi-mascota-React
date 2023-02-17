@@ -5,7 +5,7 @@ export const AdminDashboardPage = () => {
     return(
         <Box m="20px">
             <Box display={"flex"} justifyContent="space-between" alignItems={"center"}>
-                <Header title="Dashboard" subtitle="Bienvenido"></Header>
+                <Header title="Dashboard" subtitle="Bienvenido" />
             </Box>
         </Box>
     )

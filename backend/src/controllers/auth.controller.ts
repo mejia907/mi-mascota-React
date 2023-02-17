@@ -43,7 +43,7 @@ const loginCtrl = async ({ body }: Request, res: Response) => {
     httpOnly : true,
     //secure : true,
     sameSite : 'lax',
-    maxAge : 1000 * 60 * 60 
+    maxAge : 5000 * 60 * 60 
   })
 
   res.json('Login')
