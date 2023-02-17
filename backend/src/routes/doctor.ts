@@ -1,16 +1,16 @@
 import { Router } from 'express'
 import { deleteDoctor, getDoctor, getDoctors, postDoctor, updateDoctor } from '@controllers/doctor.controller'
-import { checkJwt, checkJwtCookie } from '@middlewares/session'
+import { checkJwtCookie } from '@middlewares/session'
 
 const router = Router()
 
 router.get('/', checkJwtCookie, getDoctors)
-router.get('/:id', checkJwt, getDoctor)
+router.get('/:id', checkJwtCookie, getDoctor)
 
-router.post('/', checkJwt, postDoctor)
+router.post('/', checkJwtCookie, postDoctor)
 
-router.put('/:id', checkJwt, updateDoctor)
+router.put('/:id', checkJwtCookie, updateDoctor)
 
-router.delete('/:id', checkJwt, deleteDoctor)
+router.delete('/:id', checkJwtCookie, deleteDoctor)
 
 export { router }

@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 
 import { router } from './routes'
 import db from '@config/mongo'
@@ -12,6 +13,7 @@ app.use(cors({
     credentials: true
 }))
 app.use(express.json())
+app.use(cookieParser())
 app.use(router)
 
 db().then(() => console.log("Conexion DB ready"))
