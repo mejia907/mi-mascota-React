@@ -16,7 +16,7 @@ const createClient = async (client: Client): Promise<Client> => {
  * @returns JSON con lista de Clientes
  */
 const findClients = async () => {
-  const responseClient = await ClientModel.find({})  
+  const responseClient = await ClientModel.find({}).sort({_id: -1}) 
   return responseClient
 }
 

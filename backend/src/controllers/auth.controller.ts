@@ -11,8 +11,12 @@ import { generateToken } from '@utils/jwt.handle';
  * @param res JSON con la informacion del usuario creado
  */
 const registerCtrl = async ({ body }: Request, res: Response) => {
-  const responseRegister = await registerUser(body);
-  res.send(responseRegister)
+  try {
+    const responseRegister = await registerUser(body);
+    res.status(201).json({ status: "OK", data:responseRegister })
+  } catch (error) {
+    handlesHttp(res, error?.status || 500, 'ERROR_POST_REQGISTER')
+  }
 }
 
 /**
@@ -24,12 +28,12 @@ const loginCtrl = async ({ body }: Request, res: Response) => {
   const { user, password } = body;
   const checkUser = await loginUser({ user, password });
 
-  if (!checkUser) return  res.status(500).json({ error:'NOT_FOUND_USER' })
+  if (!checkUser) return  res.status(404).json({ status: 'FAILED', error:'NOT_FOUND_USER' })
 
   const passwordHash = checkUser.password;
   const isCorrect = await verified(password, passwordHash);
 
-  if (!isCorrect) return res.status(403).json({ error:'PASSWORD_INCORRECT' })
+  if (!isCorrect) return res.status(403).json({ status: 'FAILED', error:'PASSWORD_INCORRECT' })
 
   // Permite generar un token para la sesion del usuario
   const token = generateToken(checkUser.id, checkUser.user)

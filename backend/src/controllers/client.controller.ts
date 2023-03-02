@@ -12,8 +12,8 @@ const getClient = async ({ params }: Request, res: Response) => {
         const { id } = params
         const responseClient = await findOneClient(id)
         res.send(responseClient)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_GET_DOCTOR')
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_GET_DOCTOR')
     }
 }
 
@@ -25,8 +25,8 @@ const getClients = async (req: Request, res: Response) => {
     try {
         const responseClient = await findClients()
         res.send(responseClient)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_GET_DOCTORS')
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_GET_DOCTORS')
     }
 }
 
@@ -39,9 +39,9 @@ const updateClient = async ({ params, body }: Request, res: Response) => {
     try {
         const { id } = params
         const responseClient = await findOneAndUpdateClient(id, body)
-        res.send(responseClient)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_UPDATE_DOCTOR')
+        res.send({ status: 'OK', data: responseClient })
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_UPDATE_DOCTOR')
     }
 }
 
@@ -53,9 +53,9 @@ const updateClient = async ({ params, body }: Request, res: Response) => {
 const postClient = async ({ body }: Request, res: Response) => {
     try {
         const responseClient = await createClient(body)
-        res.send(responseClient)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_POST_DOCTOR')
+        res.status(201).json({ status: 'OK', data: responseClient })
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_POST_DOCTOR')
     }
 }
 
@@ -68,9 +68,9 @@ const deleteClient = async ({ params }: Request, res: Response) => {
     try {
         const { id } = params
         const responseClient = await deleteOneClient(id)
-        res.send(responseClient)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_DELETE_DOCTOR')
+        res.send({ status: 'OK', data: responseClient })
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_DELETE_DOCTOR')
     }
 }
 

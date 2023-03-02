@@ -12,8 +12,8 @@ const getDoctor = async ({ params }: Request, res: Response) => {
         const { id } = params
         const responseDoctor = await findOneDoctor(id)
         res.send(responseDoctor)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_GET_DOCTOR')
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_GET_DOCTOR')
     }
 }
 
@@ -25,8 +25,8 @@ const getDoctors = async (req: Request, res: Response) => {
     try {
         const responseDoctor = await findDoctors()
         res.send(responseDoctor)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_GET_DOCTORS')
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_GET_DOCTORS')
     }
 }
 
@@ -39,9 +39,9 @@ const updateDoctor = async ({ params, body }: Request, res: Response) => {
     try {
         const { id } = params
         const responseDoctor = await findOneAndUpdateDoctor(id, body)
-        res.send(responseDoctor)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_UPDATE_DOCTOR')
+        res.send({ status: 'OK', data: responseDoctor })
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_UPDATE_DOCTOR')
     }
 }
 
@@ -53,9 +53,9 @@ const updateDoctor = async ({ params, body }: Request, res: Response) => {
 const postDoctor = async ({ body }: Request, res: Response) => {
     try {
         const responseDoctor = await createDoctor(body)
-        res.send(responseDoctor)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_POST_DOCTOR')
+        res.status(201).json({ status: 'OK', data: responseDoctor })
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_POST_DOCTOR')
     }
 }
 
@@ -68,9 +68,9 @@ const deleteDoctor = async ({ params }: Request, res: Response) => {
     try {
         const { id } = params
         const responseDoctor = await deleteOneDoctor(id)
-        res.send(responseDoctor)
-    } catch (e) {
-        handlesHttp(res, 500, 'ERROR_DELETE_DOCTOR')
+        res.send({ status: 'OK', data: responseDoctor })
+    } catch (error) {
+        handlesHttp(res, error?.status || 500, 'ERROR_DELETE_DOCTOR')
     }
 }
 

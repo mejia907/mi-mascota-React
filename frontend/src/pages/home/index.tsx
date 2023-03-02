@@ -33,10 +33,9 @@ export const HomePage = () => {
     const handleLogin = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
         LoginValidate.validate(loginData).then(async () =>  {
-            getSuccess(JSON.stringify(loginData))
+            //getSuccess(JSON.stringify(loginData))
             const response = await login.singin({user:loginData.user, password:loginData.password})
-            console.log(response);
-            
+                        
             //if(response.data.token && response.data.user){
             if(response.data == 'Login'){
                 navigate(loginData.typeUser) 
@@ -70,8 +69,8 @@ export const HomePage = () => {
     return (
 
         <Box component="main" sx={{ flexGrow: 1, mt: 8.7, p: 1, }}>
-            <Grid container direction="row" justifyContent="space-between" columns={{ xs: 1, sm: 8, md: 12 }}>
-                <Grid item xs={2} md={4} sx={{ mt: 5 }} >
+            <Grid container direction="row" justifyContent="space-between" >
+                <Grid item xs={12} sm={12} md={6} lg={4} sx={{ mt: 5 }} >
                     <Paper sx={{ padding: "1.2em", borderRadius: "0.5em" }}>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Typography variant="h4" sx={{ mt: 1, mb: 1 }}>Iniciar Sesión</Typography>
@@ -89,9 +88,9 @@ export const HomePage = () => {
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={6} md={8} >
+                <Grid item xs={12} sm={12} md={6} lg={8}>
                     <BackgroundLogin>
-                        <div className="login"></div>
+                        <Box className="login" minHeight={{xs: '50vh', sm:'65vh', lg:'75vh'}}/>
                     </BackgroundLogin>
                 </Grid>
             </Grid>
