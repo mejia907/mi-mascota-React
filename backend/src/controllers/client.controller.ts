@@ -32,7 +32,7 @@ const getClients = async (req: Request, res: Response) => {
 
 /**
  * Funcion que permite actualizar un Cliente con base en el ID
- * @param params ID del Client y el resto de informacion para actualizar
+ * @param params ID del Cliente y el resto de informacion para actualizar
  * @param res JSON con la informacion actualizada
  */
 const updateClient = async ({ params, body }: Request, res: Response) => {
@@ -47,7 +47,7 @@ const updateClient = async ({ params, body }: Request, res: Response) => {
 
 /**
  * Funcion que permite crear una nuevo Cliente
- * @param body Informacion del Client que se va a crear
+ * @param body Informacion del Cliente que se va a crear
  * @param res JSON con la informacion del Cliente que se creó
  */
 const postClient = async ({ body }: Request, res: Response) => {
@@ -61,7 +61,7 @@ const postClient = async ({ body }: Request, res: Response) => {
 
 /**
  * Funcion que permite eliminar un Cliente con base en el ID
- * @param params ID del doctor que se va a elimnar 
+ * @param params ID del Cliente que se va a elimnar 
  * @param res JSON con { acknowledged, deletedCount } estado y cantidad de registros eliminados
  */
 const deleteClient = async ({ params }: Request, res: Response) => {

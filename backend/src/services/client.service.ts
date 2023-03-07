@@ -16,7 +16,7 @@ const createClient = async (client: Client): Promise<Client> => {
  * @returns JSON con lista de Clientes
  */
 const findClients = async () => {
-  const responseClient = await ClientModel.find({}).sort({_id: -1}) 
+  const responseClient = await ClientModel.find({}).sort({_id: -1})
   return responseClient
 }
 
@@ -26,7 +26,7 @@ const findClients = async () => {
  * @returns JSON con el registro encontrado
  */
 const findOneClient = async (id: string) => {
-  const responseClient = await ClientModel.findOne({ _id: id })
+  const responseClient = await ClientModel.findOne({ _id: id }).populate({path:'patients', select: '_id name species'})
   return responseClient
 }
 
