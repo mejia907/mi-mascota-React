@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export interface Client{
   type_document: string;
   document: string;
@@ -8,4 +10,5 @@ export interface Client{
   address: string;
   email: string;
   telephone: number;  
+  patients?: Types.ObjectId
 }

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import { ChangeEvent, FormEvent, SyntheticEvent, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import DialogTitle from '@mui/material/DialogTitle'
 import Dialog from '@mui/material/Dialog'
@@ -107,17 +107,17 @@ export const AddClient = ({open, close, submitClient} : HeaderProps) => {
 
   const { getError, getSuccess } = useNotification()
 
-  const [option, setOption] = React.useState('1')
-  const [birthdate, setBirthdate] = React.useState<Dayjs | null>(
+  const [option, setOption] = useState('1')
+  const [birthdate, setBirthdate] = useState<Dayjs | null>(
     dayjs()
   )
-  const [clientData, setClient] = React.useState<ClientType>(INITIAL_STATE)
+  const [clientData, setClient] = useState<ClientType>(INITIAL_STATE)
 
-  const dataClient = (event: React.ChangeEvent<HTMLInputElement>) => {   
+  const dataClient = (event: ChangeEvent<HTMLInputElement>) => {   
     setClient({ ...clientData, [event.target.name]: event.target.value })
   }
 
-  const handleOptions = (event: React.SyntheticEvent, newOption: string) => {
+  const handleOptions = (event: SyntheticEvent, newOption: string) => {
     setOption(newOption)
   }
 
@@ -146,7 +146,7 @@ export const AddClient = ({open, close, submitClient} : HeaderProps) => {
   }
 
 
-  const handleSaveClient = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleSaveClient = (event: FormEvent<HTMLInputElement>) => {
     event.preventDefault()
     
     ClientValidate.validate(clientData).then(async () => {

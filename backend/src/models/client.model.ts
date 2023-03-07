@@ -39,7 +39,11 @@ const ClientSchema = new Schema<Client> (
       type: String,
       enum: ['M', 'F'],
       required: true,
-    }      
+    },     
+    patients: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Patient'
+    }] 
   },
   {
       timestamps: true, //Permite generar en el mongo la fecha de actualizacion y creacion

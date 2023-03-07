@@ -70,7 +70,7 @@ export const SidebarApp = () => {
           </MenuItem>
 
           <MenuItem 
-            component={<Link to="/diary" />}
+            component={<Link to="/patients" />}
             icon={<PetsOutlinedIcon />}
           > 
             <Typography>Pacientes</Typography>
