@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box, Button } from '@mui/material'
 import { DataGrid, GridToolbar, GridValueGetterParams, GridActionsCellItem, GridColumns, GridRowId } from '@mui/x-data-grid'
 import PetsOutlinedIcon from '@mui/icons-material/PetsOutlined'
@@ -6,6 +6,8 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import { Header } from '../../components/Header'
+import { patient } from '../../api/patient.api';
+import { AddPatient } from './add';
 
 export const PatientPage = () => {
 
@@ -13,11 +15,25 @@ export const PatientPage = () => {
   const [loading, setLoading] = useState(true)
   const [openAddPatient, setOpenAddPatient] = useState(false)
   
+  useEffect(() => {
+    patient.patientAll().then((response) => {
+      setPatientData(response.data)
+      setLoading(false)
+    }).catch((error) => {
+      console.error(error)
+      setLoading(false)
+    })
+  },[])
+
   const handleOpenAddPatient = () => {
     setOpenAddPatient(true)
   }
 
-    const deletePatient = useCallback(
+  const handleCloseAddPatient = () => {
+    setOpenAddPatient(false)
+  }
+
+  const deletePatient = useCallback(
     (id: GridRowId) => () => {
       setTimeout(() => {
         console.log(id);
@@ -49,13 +65,13 @@ export const PatientPage = () => {
 
   const columns = useMemo<GridColumns>( 
     () => [
-      { field: 'name', headerName: 'Nombre', width: 130, }, 
-      { field: 'birthdate', headerName: 'Fecha de nacimiento', width: 130, },
-      { field: 'weight', headerName: 'Peso', width: 140, },
-      { field: 'gender', headerName: 'Sexo', width: 140, },  
-      { field: 'species', headerName: 'Especie', width: 230, },  
+      { field: 'name', headerName: 'Nombre', width: 140, }, 
+      { field: 'birthdate', headerName: 'Fecha de nacimiento', width: 170, },
+      { field: 'weight', headerName: 'Peso', width: 120, },
+      { field: 'gender', headerName: 'Sexo', width: 100, },  
+      { field: 'species', headerName: 'Especie', width: 130, },  
       { field: 'race', headerName: 'Raza', width: 180, },
-      { field: 'sterilized', headerName: 'Esterelizado', width: 80, },
+      { field: 'sterilized', headerName: 'Esterelizado', width: 120, },
       {
         field: 'options',
         headerName: 'Opciones',  
@@ -86,13 +102,13 @@ export const PatientPage = () => {
 
   return (
     <Box m='20px' sx={{width:'100%'}}>
-    <Header title='Pacientes' subtitle='Administrar los pacientes' />
-    <Box alignContent={'left'}>
-      <Button variant='contained' startIcon={<PetsOutlinedIcon />} onClick={handleOpenAddPatient}> 
-        Adicionar
-      </Button>
-    </Box>
-    
+      <Header title='Pacientes' subtitle='Administrar los pacientes' />
+      <Box textAlign={'right'}>
+        <Button variant='contained' startIcon={<PetsOutlinedIcon />} onClick={handleOpenAddPatient}> 
+          Adicionar
+        </Button>
+      </Box>
+      <AddPatient open={openAddPatient} close={handleCloseAddPatient} submitPatient={AddPatient} />
     <Box 
     sx={{ height: '75vh', width: '100%',
     '& .MuiDataGrid-root': {

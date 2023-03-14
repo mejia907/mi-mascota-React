@@ -117,7 +117,7 @@ export const ClientPage = () => {
   return (
     <Box m='20px' sx={{width:'100%'}}>
       <Header title='Clientes' subtitle='Administrar los clientes' />
-      <Box alignContent={'left'}>
+      <Box textAlign={'right'}>
         <Button variant='contained' startIcon={<PersonAddAlt1Icon />} onClick={handleOpenAddClient}> 
           Adicionar
         </Button>
